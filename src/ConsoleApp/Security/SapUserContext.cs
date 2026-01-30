@@ -1,13 +1,21 @@
-namespace ConsoleApp.Security;
-
-public static class SapUserContext
+namespace ConsoleApp.Security
 {
-    // Usuario SAP actual (simulado)
-    public static string CurrentUser { get; private set; } = "SAP_ADMIN";
-
-    // Simula login SAP
-    public static void Login(string userName)
+    public static class SapUserContext
     {
-        CurrentUser = userName;
+        // 🔹 Usuario actual que realiza las operaciones
+        public static string CurrentUser { get; private set; } = "SYSTEM";
+
+        // 🔹 Inicializa sesión con el usuario SAP
+        public static void Login(string user)
+        {
+            if (string.IsNullOrWhiteSpace(user))
+            {
+                CurrentUser = "SYSTEM"; // fallback si no se ingresa usuario
+            }
+            else
+            {
+                CurrentUser = user.Trim().ToUpper(); // normalizar
+            }
+        }
     }
 }
